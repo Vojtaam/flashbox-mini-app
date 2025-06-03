@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashBOX Mini App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">📦</div>
+                <h1>FlashBOX Logger</h1>
+            </div>
+            <div class="version">v2.0.0</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- State Buttons Section -->
+            <section class="state-buttons-section">
+                <h2>Vyberte akci</h2>
+                <div class="state-buttons">
+                    <button id="state1-btn" class="state-btn state-btn--blue" data-state="1">
+                        <span class="btn-icon">📥</span>
+                        <span class="btn-text">Stav 1<br>Vloženy úložné karty</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                    
+                    <button id="state2-btn" class="state-btn state-btn--green" data-state="2">
+                        <span class="btn-icon">📤</span>
+                        <span class="btn-text">Stav 2<br>Vyzvednuty úložné karty</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Description Section -->
+            <section class="description-section">
+                <div class="input-group">
+                    <label for="description-input" class="input-label">
+                        Přidat popis (volitelné)
+                    </label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="description-input" 
+                            class="form-control description-input"
+                            placeholder="např. Kingston SD 128GB"
+                            maxlength="50"
+                        >
+                        <div class="char-counter">
+                            <span id="char-count">0</span>/50
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmation-modal" class="modal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Potvrdit odeslání</h3>
+                    <button class="modal-close" id="modal-close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="message-preview">
+                        <h4>Náhled zprávy:</h4>
+                        <div id="message-preview-text" class="preview-text"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancel-btn" class="btn btn--secondary">Zrušit</button>
+                    <button id="confirm-btn" class="btn btn--primary">
+                        <span class="btn-text">Odeslat</span>
+                        <div class="loading-spinner"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-animation">
+                    <div class="pulse-circle"></div>
+                    <div class="pulse-circle delay-1"></div>
+                    <div class="pulse-circle delay-2"></div>
+                </div>
+                <div class="loading-text">Odesílání...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Animation -->
+        <div id="success-overlay" class="success-overlay">
+            <div class="success-content">
+                <div class="success-checkmark">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="25" fill="none" stroke="#00ff88" stroke-width="3"/>
+                        <path d="M18 30l8 8 16-16" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="success-text">Úspěšně odeslano!</div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+
+        <!-- Debug Panel -->
+        <div id="debug-panel" class="debug-panel">
+            <div class="debug-header">
+                <h4>Debug Mode</h4>
+                <button id="debug-close" class="debug-close">×</button>
+            </div>
+            <div class="debug-content">
+                <div class="debug-info">
+                    <div class="debug-item">
+                        <strong>Telegram WebApp:</strong> 
+                        <span id="debug-telegram">Detekce...</span>
+                    </div>
+                    <div class="debug-item">
+                        <strong>Uživatel:</strong> 
+                        <span id="debug-user">N/A</span>
+                    </div>
+                    <div class="debug-item">
+                        <strong>Platform:</strong> 
+                        <span id="debug-platform">N/A</span>
+                    </div>
+                </div>
+                <div class="debug-log" id="debug-log"></div>
+                <button id="test-send-btn" class="btn btn--outline btn--sm">Test Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
