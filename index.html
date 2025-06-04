@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashBOX Mini App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">📦 FlashBOX</h1>
+                <span class="app-version">v2.0</span>
+            </div>
+        </header>
+
+        <!-- Debug Panel -->
+        <div class="debug-panel" id="debugPanel">
+            <div class="debug-content">
+                <h3>🐛 Debug Mode</h3>
+                <p>Telegram API není dostupné</p>
+                <div class="debug-info">
+                    <span>Username: <strong id="debugUsername">debug_user</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Description Input -->
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="description" class="form-label">Volitelný popis</label>
+                    <input 
+                        type="text" 
+                        id="description" 
+                        class="form-control description-input" 
+                        placeholder="Zadejte popis..."
+                        maxlength="50"
+                    >
+                    <div class="character-counter">
+                        <span id="charCount">0</span> / 50
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions-section">
+                <button class="action-btn action-btn--primary" id="state1Btn" data-state="1">
+                    <div class="btn-ripple"></div>
+                    <div class="btn-content">
+                        <span class="btn-icon">📥</span>
+                        <span class="btn-text">Stav 1</span>
+                        <span class="btn-subtitle">Vloženy úložné karty</span>
+                    </div>
+                </button>
+
+                <button class="action-btn action-btn--secondary" id="state2Btn" data-state="2">
+                    <div class="btn-ripple"></div>
+                    <div class="btn-content">
+                        <span class="btn-icon">📤</span>
+                        <span class="btn-text">Stav 2</span>
+                        <span class="btn-subtitle">Vyzvednuty úložné karty</span>
+                    </div>
+                </button>
+            </div>
+        </main>
+
+        <!-- Confirmation Modal -->
+        <div class="modal-overlay" id="confirmModal">
+            <div class="modal confirmation-modal">
+                <div class="modal-header">
+                    <h3>Potvrdit akci</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="message-preview">
+                        <h4>Náhled zprávy:</h4>
+                        <div class="preview-text" id="messagePreview"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--secondary" id="cancelBtn">Zrušit</button>
+                    <button class="btn btn--primary" id="confirmBtn">Potvrdit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Modal -->
+        <div class="modal-overlay" id="loadingModal">
+            <div class="modal loading-modal">
+                <div class="modal-body">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">
+                        <h3>Odesílání...</h3>
+                        <p id="loadingSubtext">Připravuji zprávu</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" id="successModal">
+            <div class="modal success-modal">
+                <div class="modal-header">
+                    <div class="success-icon">✅</div>
+                    <h3>Úspěch!</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Zpráva byla úspěšně odeslána</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--primary" id="successOkBtn">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
