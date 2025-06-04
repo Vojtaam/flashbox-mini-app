@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashBOX v3.0</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Načítám FlashBOX v3.0...</div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo-wrapper">
+                    <span class="logo-text">FB</span>
+                    <div class="logo-glow"></div>
+                </div>
+                <h1 class="app-title">FlashBOX</h1>
+            </div>
+            <p class="app-subtitle">Rychlé hlášení stavu úložných karet</p>
+            <div class="version-badge">v3.0</div>
+        </header>
+
+        <!-- User Info Panel -->
+        <div class="user-info-panel">
+            <div class="user-avatar">
+                <span class="avatar-icon">👤</span>
+                <div class="avatar-ring"></div>
+            </div>
+            <div class="user-details">
+                <span class="user-label">Uživatel</span>
+                <span id="username-display" class="username">@načítám...</span>
+            </div>
+            <div class="status-indicator online"></div>
+        </div>
+
+        <!-- Description Input Section -->
+        <div class="input-section">
+            <div class="form-group">
+                <label class="form-label" for="description-input">
+                    <span class="label-icon">📝</span>
+                    Volitelný popis
+                    <span class="optional-badge">nepovinné</span>
+                </label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="description-input" 
+                        class="form-control" 
+                        placeholder="Dodatečné informace..."
+                        maxlength="100"
+                    >
+                    <div class="input-border-glow"></div>
+                    <div class="character-counter">
+                        <span id="char-count">0</span><span class="char-max">/100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- State Buttons -->
+        <div class="state-buttons">
+            <button class="state-button state-inserted" data-action="Vloženo">
+                <div class="button-background"></div>
+                <div class="button-content">
+                    <div class="state-icon">🔵</div>
+                    <div class="state-text">
+                        <span class="state-title">Vloženo</span>
+                        <span class="state-description">Úložné karty byly vloženy</span>
+                    </div>
+                </div>
+                <div class="ripple-effect"></div>
+                <div class="button-glow"></div>
+            </button>
+            
+            <button class="state-button state-removed" data-action="Vyzvednuto">
+                <div class="button-background"></div>
+                <div class="button-content">
+                    <div class="state-icon">🟢</div>
+                    <div class="state-text">
+                        <span class="state-title">Vyzvednuto</span>
+                        <span class="state-description">Úložné karty byly vyzvednuty</span>
+                    </div>
+                </div>
+                <div class="ripple-effect"></div>
+                <div class="button-glow"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal-backdrop">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Potvrdit odeslání</h3>
+                <div class="modal-close" onclick="hideModal('confirmation-modal')">×</div>
+            </div>
+            <div class="modal-body">
+                <p>Zkontrolujte zprávu před odeslání:</p>
+                <div class="message-preview">
+                    <div class="preview-label">Náhled zprávy:</div>
+                    <div class="preview-content" id="message-preview"></div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn--outline" id="cancel-btn">
+                    <span>Zrušit</span>
+                </button>
+                <button class="btn btn--primary" id="confirm-btn">
+                    <span>Odeslat</span>
+                    <div class="btn-loading">
+                        <div class="loading-spinner-small"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-backdrop">
+        <div class="modal modal--success">
+            <div class="modal-body">
+                <div class="success-animation">
+                    <div class="checkmark-container">
+                        <div class="checkmark">✓</div>
+                        <div class="success-ring"></div>
+                    </div>
+                    <div class="confetti"></div>
+                </div>
+                <h3>Zpráva odeslána!</h3>
+                <p>Stav byl úspěšně nahlášen do chatu.</p>
+                <div class="auto-close-info">
+                    Automatické zavření za <span id="countdown">3</span>s
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Particle Background -->
+    <div class="particles-background">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
