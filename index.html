@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashBOX v4.0 - Fixed</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner-inner"></div>
+        </div>
+        <div class="loading-text">Načítám FlashBOX v4.0...</div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div class="particles-background">
+        <div class="particle" data-speed="0.5"></div>
+        <div class="particle" data-speed="0.3"></div>
+        <div class="particle" data-speed="0.7"></div>
+        <div class="particle" data-speed="0.4"></div>
+        <div class="particle" data-speed="0.6"></div>
+        <div class="particle" data-speed="0.2"></div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Header with Enhanced Design -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo-wrapper">
+                    <span class="logo-text">FB</span>
+                    <div class="logo-glow"></div>
+                    <div class="logo-particles">
+                        <div class="logo-particle"></div>
+                        <div class="logo-particle"></div>
+                        <div class="logo-particle"></div>
+                    </div>
+                </div>
+                <div class="title-wrapper">
+                    <h1 class="app-title">FlashBOX</h1>
+                    <div class="title-glow"></div>
+                </div>
+            </div>
+            <p class="app-subtitle">Rychlé hlášení stavu úložných karet</p>
+            <div class="version-badge">
+                <span class="version-text">v4.0</span>
+                <span class="fixed-badge">FIXED</span>
+            </div>
+        </header>
+
+        <!-- User Info Panel with Advanced Glass Design -->
+        <div class="user-info-panel">
+            <div class="panel-glow"></div>
+            <div class="user-avatar">
+                <span class="avatar-icon">👤</span>
+                <div class="avatar-ring"></div>
+                <div class="avatar-pulse"></div>
+            </div>
+            <div class="user-details">
+                <span class="user-label">Uživatel</span>
+                <span id="username-display" class="username">@načítám...</span>
+                <div class="status-row">
+                    <div class="status-indicator online"></div>
+                    <span class="status-text">Online</span>
+                </div>
+            </div>
+            <div class="connection-status">
+                <div class="signal-bars">
+                    <div class="bar bar-1"></div>
+                    <div class="bar bar-2"></div>
+                    <div class="bar bar-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Input Section -->
+        <div class="input-section">
+            <div class="form-group">
+                <label class="form-label" for="description-input">
+                    <div class="label-content">
+                        <span class="label-icon">📝</span>
+                        <span class="label-text">Volitelný popis</span>
+                        <span class="optional-badge">nepovinné</span>
+                    </div>
+                </label>
+                <div class="input-wrapper">
+                    <div class="input-container">
+                        <input 
+                            type="text" 
+                            id="description-input" 
+                            class="form-control" 
+                            placeholder="Např: Kingston SD 128GB, Samsung microSD..."
+                            maxlength="100"
+                        >
+                        <div class="input-border-glow"></div>
+                        <div class="input-focus-ring"></div>
+                    </div>
+                    <div class="character-counter">
+                        <span id="char-count">0</span>
+                        <span class="char-separator">/</span>
+                        <span class="char-max">100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced State Buttons -->
+        <div class="state-buttons">
+            <button class="state-button state-inserted" data-action="Vloženo">
+                <div class="button-background">
+                    <div class="bg-layer bg-base"></div>
+                    <div class="bg-layer bg-gradient"></div>
+                    <div class="bg-layer bg-pattern"></div>
+                </div>
+                <div class="button-content">
+                    <div class="state-icon-wrapper">
+                        <div class="state-icon">🔵</div>
+                        <div class="icon-glow blue-glow"></div>
+                    </div>
+                    <div class="state-text">
+                        <span class="state-title">Vloženo</span>
+                        <span class="state-description">Úložné karty byly vloženy</span>
+                    </div>
+                    <div class="state-arrow">→</div>
+                </div>
+                <div class="ripple-effect"></div>
+                <div class="button-glow blue-button-glow"></div>
+                <div class="button-particles">
+                    <div class="btn-particle"></div>
+                    <div class="btn-particle"></div>
+                    <div class="btn-particle"></div>
+                </div>
+            </button>
+            
+            <button class="state-button state-removed" data-action="Vyzvednuto">
+                <div class="button-background">
+                    <div class="bg-layer bg-base"></div>
+                    <div class="bg-layer bg-gradient"></div>
+                    <div class="bg-layer bg-pattern"></div>
+                </div>
+                <div class="button-content">
+                    <div class="state-icon-wrapper">
+                        <div class="state-icon">🟢</div>
+                        <div class="icon-glow green-glow"></div>
+                    </div>
+                    <div class="state-text">
+                        <span class="state-title">Vyzvednuto</span>
+                        <span class="state-description">Úložné karty byly vyzvednuty</span>
+                    </div>
+                    <div class="state-arrow">→</div>
+                </div>
+                <div class="ripple-effect"></div>
+                <div class="button-glow green-button-glow"></div>
+                <div class="button-particles">
+                    <div class="btn-particle"></div>
+                    <div class="btn-particle"></div>
+                    <div class="btn-particle"></div>
+                </div>
+            </button>
+        </div>
+
+        <!-- Debug Info Panel (only visible in debug mode) -->
+        <div id="debug-panel" class="debug-panel hidden">
+            <div class="debug-header">🔧 Debug Mode</div>
+            <div class="debug-content">
+                <div class="debug-item">
+                    <span class="debug-label">Poslední pokus:</span>
+                    <span id="debug-last-method" class="debug-value">-</span>
+                </div>
+                <div class="debug-item">
+                    <span class="debug-label">Stav API:</span>
+                    <span id="debug-api-status" class="debug-value">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Confirmation Modal -->
+    <div id="confirmation-modal" class="modal-backdrop">
+        <div class="modal">
+            <div class="modal-glow"></div>
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <h3>Potvrdit odeslání</h3>
+                    <div class="title-underline"></div>
+                </div>
+                <button class="modal-close" onclick="hideModal('confirmation-modal')">
+                    <span class="close-icon">×</span>
+                    <div class="close-glow"></div>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Zkontrolujte zprávu před odeslání do chatu:</p>
+                <div class="message-preview">
+                    <div class="preview-header">
+                        <div class="preview-label">Náhled zprávy:</div>
+                        <div class="preview-format">FlashBOX Formát</div>
+                    </div>
+                    <div class="preview-content">
+                        <code id="message-preview"></code>
+                    </div>
+                </div>
+                <div class="sending-methods">
+                    <div class="methods-label">Metody odesílání:</div>
+                    <div class="methods-list">
+                        <div class="method-item primary">1. Inline Query</div>
+                        <div class="method-item fallback">2. Send Data</div>
+                        <div class="method-item fallback">3. Post Event</div>
+                        <div class="method-item debug">4. Debug Mode</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn--secondary" id="cancel-btn">
+                    <span class="btn-text">Zrušit</span>
+                    <div class="btn-bg"></div>
+                </button>
+                <button class="btn btn--primary" id="confirm-btn">
+                    <span class="btn-text">Odeslat zprávu</span>
+                    <div class="btn-loading">
+                        <div class="loading-spinner-small"></div>
+                    </div>
+                    <div class="btn-bg"></div>
+                    <div class="btn-glow"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Success Modal -->
+    <div id="success-modal" class="modal-backdrop">
+        <div class="modal modal--success">
+            <div class="modal-glow success-glow"></div>
+            <div class="modal-body">
+                <div class="success-animation">
+                    <div class="checkmark-container">
+                        <div class="checkmark">✓</div>
+                        <div class="success-ring"></div>
+                        <div class="success-burst">
+                            <div class="burst-particle"></div>
+                            <div class="burst-particle"></div>
+                            <div class="burst-particle"></div>
+                            <div class="burst-particle"></div>
+                            <div class="burst-particle"></div>
+                            <div class="burst-particle"></div>
+                        </div>
+                    </div>
+                    <div class="confetti-container">
+                        <div class="confetti"></div>
+                        <div class="confetti"></div>
+                        <div class="confetti"></div>
+                        <div class="confetti"></div>
+                        <div class="confetti"></div>
+                        <div class="confetti"></div>
+                    </div>
+                </div>
+                <h3>Zpráva úspěšně odeslána!</h3>
+                <p>Stav byl nahlášen do chatu. Aplikace se automaticky zavře.</p>
+                <div class="success-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Metoda:</span>
+                        <span id="success-method" class="detail-value">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Čas:</span>
+                        <span id="success-time" class="detail-value">-</span>
+                    </div>
+                </div>
+                <div class="auto-close-info">
+                    <div class="countdown-circle">
+                        <div class="countdown-progress"></div>
+                        <span id="countdown">3</span>
+                    </div>
+                    <span class="countdown-text">Automatické zavření</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
