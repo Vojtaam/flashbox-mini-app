@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashBOX Logger v5.0</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="app-title">FlashBOX Logger</h1>
+            <p class="app-subtitle">v5.0</p>
+        </header>
+
+        <!-- User Info -->
+        <div class="user-info">
+            <span class="user-label">Uživatel:</span>
+            <span id="username-display" class="username">načítám...</span>
+            <div class="connection-status">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="connection-text">připojuji...</span>
+            </div>
+        </div>
+
+        <!-- Description Input -->
+        <div class="input-section">
+            <label for="description-input" class="input-label">Popis (volitelné)</label>
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="description-input" 
+                    class="description-input" 
+                    placeholder="Dodatečné informace..."
+                    maxlength="50"
+                >
+                <div class="char-counter">
+                    <span id="char-count">0</span>/50
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn action-btn--insert" data-action="Vloženo" id="insert-btn">
+                <span class="btn-icon">🔵</span>
+                <span class="btn-text">Vloženy úložné karty</span>
+            </button>
+            
+            <button class="action-btn action-btn--remove" data-action="Vyzvednuto" id="remove-btn">
+                <span class="btn-icon">🟢</span>
+                <span class="btn-text">Vyzvednuty úložné karty</span>
+            </button>
+        </div>
+
+        <!-- Debug Info -->
+        <div class="debug-info" id="debug-info">
+            <div class="debug-label">Debug mode</div>
+            <div class="debug-details">
+                <span>Režim: <span id="debug-mode">detekuji...</span></span>
+                <span>API: <span id="api-status">testování</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <div id="confirmation-dialog" class="dialog-overlay">
+        <div class="dialog">
+            <div class="dialog-header">
+                <h3>Potvrdit odeslání</h3>
+            </div>
+            <div class="dialog-body">
+                <p>Zpráva k odeslání:</p>
+                <div class="message-preview" id="message-preview"></div>
+            </div>
+            <div class="dialog-actions">
+                <button class="btn btn--secondary" id="cancel-btn">Zrušit</button>
+                <button class="btn btn--primary" id="confirm-btn">
+                    <span class="btn-content">Odeslat</span>
+                    <div class="btn-spinner" id="btn-spinner"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
